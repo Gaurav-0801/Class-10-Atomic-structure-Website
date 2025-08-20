@@ -1,0 +1,273 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Atomic Structure Educational Theme */
+    --background: 220 30% 8%;
+    --foreground: 210 40% 95%;
+
+    --card: 220 25% 12%;
+    --card-foreground: 210 40% 95%;
+
+    --popover: 220 25% 12%;
+    --popover-foreground: 210 40% 95%;
+
+    --primary: 270 100% 70%;
+    --primary-foreground: 220 30% 8%;
+
+    --secondary: 220 20% 20%;
+    --secondary-foreground: 210 40% 95%;
+
+    --muted: 220 20% 16%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 195 100% 60%;
+    --accent-foreground: 220 30% 8%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 20% 20%;
+    --input: 220 20% 16%;
+    --ring: 270 100% 70%;
+
+    /* Particle Colors */
+    --electron: 200 100% 70%;
+    --proton: 15 100% 65%;
+    --neutron: 120 60% 60%;
+    --nucleus-glow: 45 100% 70%;
+    
+    /* Orbital Colors */
+    --orbital-s: 200 100% 70%;
+    --orbital-p: 270 100% 70%;
+    --orbital-d: 15 100% 65%;
+    --orbital-f: 300 100% 70%;
+
+    /* Gradients */
+    --gradient-cosmic: linear-gradient(135deg, hsl(220 30% 8%), hsl(270 30% 15%));
+    --gradient-atom: radial-gradient(circle, hsl(45 100% 70% / 0.3), transparent 70%);
+    --gradient-orbital: linear-gradient(45deg, hsl(var(--primary) / 0.3), hsl(var(--accent) / 0.3));
+
+    /* Animations */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-orbital: all 2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background: var(--gradient-cosmic);
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  /* Particle Animation Classes */
+  .electron-orbit {
+    animation: orbit 4s linear infinite;
+  }
+  
+  .electron-orbit-fast {
+    animation: orbit 2s linear infinite;
+  }
+  
+  .proton-glow {
+    animation: pulse-glow 2s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 8px hsl(var(--proton)));
+  }
+  
+  .nucleus-glow {
+    animation: nucleus-pulse 3s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 20px hsl(var(--nucleus-glow)));
+  }
+  
+  .orbital-fade-in {
+    animation: orbital-appear 1s ease-out forwards;
+    opacity: 0;
+  }
+  
+  /* Interactive Elements */
+  .atom-card {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    backdrop-filter: blur(10px);
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .atom-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.5), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .atom-card:hover {
+    border-color: hsl(var(--primary));
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px hsl(var(--primary) / 0.3), 
+                0 10px 30px hsl(var(--accent) / 0.2);
+  }
+  
+  .atom-card:hover::before {
+    opacity: 1;
+  }
+  
+  .particle-button {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .particle-button:hover {
+    border-color: hsl(var(--primary));
+    background: hsl(var(--primary) / 0.1);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px hsl(var(--primary) / 0.2);
+  }
+  
+  .particle-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.3), transparent);
+    transition: left 0.5s;
+  }
+  
+  .particle-button:hover::before {
+    left: 100%;
+  }
+  
+  .particle-button:active {
+    transform: translateY(0);
+  }
+}
+
+@layer utilities {
+  .text-electron { color: hsl(var(--electron)); }
+  .text-proton { color: hsl(var(--proton)); }
+  .text-neutron { color: hsl(var(--neutron)); }
+  .text-nucleus { color: hsl(var(--nucleus-glow)); }
+  
+  .bg-electron { background-color: hsl(var(--electron)); }
+  .bg-proton { background-color: hsl(var(--proton)); }
+  .bg-neutron { background-color: hsl(var(--neutron)); }
+  .bg-nucleus { background-color: hsl(var(--nucleus-glow)); }
+  
+  .border-electron { border-color: hsl(var(--electron)); }
+  .border-proton { border-color: hsl(var(--proton)); }
+  .border-neutron { border-color: hsl(var(--neutron)); }
+  
+  .gradient-cosmic { background: var(--gradient-cosmic); }
+  .gradient-atom { background: var(--gradient-atom); }
+  .gradient-orbital { background: var(--gradient-orbital); }
+  
+  .shimmer {
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.3), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+  
+  .float { animation: float 3s ease-in-out infinite; }
+  .glow-pulse { animation: glow-pulse 2s ease-in-out infinite; }
+}
+
+/* Keyframes for Animations */
+@keyframes orbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-glow {
+  0% { 
+    filter: drop-shadow(0 0 8px hsl(var(--proton)));
+    transform: scale(1);
+  }
+  100% { 
+    filter: drop-shadow(0 0 16px hsl(var(--proton)));
+    transform: scale(1.05);
+  }
+}
+
+@keyframes nucleus-pulse {
+  0% { 
+    filter: drop-shadow(0 0 20px hsl(var(--nucleus-glow)));
+    transform: scale(1);
+  }
+  100% { 
+    filter: drop-shadow(0 0 40px hsl(var(--nucleus-glow)));
+    transform: scale(1.1);
+  }
+}
+
+@keyframes orbital-appear {
+  0% { 
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { 
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+  }
+  50% { 
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.6), 
+                0 0 60px hsl(var(--accent) / 0.3);
+  }
+}
