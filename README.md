@@ -2,7 +2,7 @@
 
 An interactive educational web application designed to teach Class 10 Chemistry students about atomic structure through visual simulations, animations, and engaging content.
 
-**Live Demo**: https://lovable.dev/projects/914cdf83-6960-4988-9426-b1158fa4fbbf
+**Live Demo**:https://class-10-atomic-structure-website.vercel.app/
 
 ## Educational Approach & Design Decisions
 
